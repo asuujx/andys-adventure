@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dv3mxxu3mjn6c"]
+[gd_scene load_steps=19 format=3 uid="uid://dv3mxxu3mjn6c"]
 
 [ext_resource type="Texture2D" uid="uid://bg3regl3jdvx3" path="res://assets/textures/player/Dude_Monster_Idle_4.png" id="1_eqjur"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_imn30"]
@@ -95,6 +95,9 @@ height = 20.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ae8i"]
 size = Vector2(16, 22)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_y2i4o"]
+radius = 368.136
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_imn30")
@@ -118,6 +121,26 @@ collision_mask = 2
 position = Vector2(-1, 3)
 shape = SubResource("RectangleShape2D_7ae8i")
 
+[node name="Attack" type="Node2D" parent="."]
+
+[node name="IceSpearTimer" type="Timer" parent="Attack"]
+wait_time = 1.5
+
+[node name="IceSpearAttackTimer" type="Timer" parent="Attack/IceSpearTimer"]
+wait_time = 0.075
+
+[node name="EnemyDetectionArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea"]
+shape = SubResource("CircleShape2D_y2i4o")
+
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+[connection signal="timeout" from="Attack/IceSpearTimer" to="." method="_on_ice_spear_timer_timeout"]
+[connection signal="timeout" from="Attack/IceSpearTimer/IceSpearAttackTimer" to="." method="_on_ice_spear_attack_timer_timeout"]
+[connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
+[connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
 
 [editable path="HurtBox"]

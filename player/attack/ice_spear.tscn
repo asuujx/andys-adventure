@@ -1,7 +1,30 @@
-[gd_scene format=3 uid="uid://mcess32dnr8b"]
+[gd_scene load_steps=4 format=3 uid="uid://mcess32dnr8b"]
 
-[node name="IceSpear" type="Area2D"]
+[ext_resource type="Script" path="res://player/attack/ice_spear.gd" id="1_0juvb"]
+[ext_resource type="Texture2D" uid="uid://bqfw6ylt2j380" path="res://player/attack/ice_spear.png" id="1_vvtvu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_id8of"]
+size = Vector2(6.36396, 33.9411)
+
+[node name="IceSpear" type="Area2D" groups=["attack"]]
+top_level = true
+scale = Vector2(0.1, 0.1)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_0juvb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vvtvu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.75, -0.75)
+rotation = -0.785398
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_id8of")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 19.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
