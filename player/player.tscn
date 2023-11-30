@@ -1,9 +1,9 @@
 [gd_scene load_steps=18 format=3 uid="uid://dv3mxxu3mjn6c"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_d7nwl"]
 [ext_resource type="Texture2D" uid="uid://bg3regl3jdvx3" path="res://assets/textures/player/Dude_Monster_Idle_4.png" id="1_eqjur"]
+[ext_resource type="Script" path="res://player/player.gd" id="1_imn30"]
 [ext_resource type="Texture2D" uid="uid://bs6hhcaepecwm" path="res://assets/textures/player/Dude_Monster_Walk_6.png" id="2_gf2se"]
-[ext_resource type="PackedScene" uid="uid://b85juq3tpxqxc" path="res://scenes/hurt_box.tscn" id="4_0wd1y"]
+[ext_resource type="PackedScene" uid="uid://b85juq3tpxqxc" path="res://utility/hurt_box.tscn" id="4_0wd1y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhoqn"]
 atlas = ExtResource("1_eqjur")
@@ -97,7 +97,7 @@ size = Vector2(16, 22)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
-script = ExtResource("1_d7nwl")
+script = ExtResource("1_imn30")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_243wf")

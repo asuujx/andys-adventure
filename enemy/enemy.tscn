@@ -1,9 +1,9 @@
 [gd_scene load_steps=15 format=3 uid="uid://dai6yg3fgirql"]
 
 [ext_resource type="Texture2D" uid="uid://d3jyvcpemymcg" path="res://assets/textures/enemy/Pink_Monster_Run_6.png" id="1_luifr"]
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_sarrb"]
-[ext_resource type="PackedScene" uid="uid://b85juq3tpxqxc" path="res://scenes/hurt_box.tscn" id="3_j6j3f"]
-[ext_resource type="PackedScene" uid="uid://2mjam4hx604l" path="res://scenes/hit_box.tscn" id="4_82q17"]
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_uef8d"]
+[ext_resource type="PackedScene" uid="uid://b85juq3tpxqxc" path="res://utility/hurt_box.tscn" id="3_j6j3f"]
+[ext_resource type="PackedScene" uid="uid://2mjam4hx604l" path="res://utility/hit_box.tscn" id="4_82q17"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_082ni"]
 atlas = ExtResource("1_luifr")
@@ -67,7 +67,7 @@ size = Vector2(12, 20)
 
 [node name="Enemy" type="CharacterBody2D"]
 motion_mode = 1
-script = ExtResource("1_sarrb")
+script = ExtResource("1_uef8d")
 movement_speed = 30.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
