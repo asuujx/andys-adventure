@@ -75,7 +75,6 @@ movement_speed = 30.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_uvohf")
 animation = &"run"
-frame_progress = 0.208063
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -85,6 +84,7 @@ shape = SubResource("CapsuleShape2D_7sidl")
 [node name="HurtBox" parent="." instance=ExtResource("3_j6j3f")]
 collision_layer = 4
 collision_mask = 4
+HurtBoxType = 1
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(0.5, 2.5)

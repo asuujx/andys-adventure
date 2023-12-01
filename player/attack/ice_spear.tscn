@@ -19,7 +19,6 @@ texture = ExtResource("1_vvtvu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.75, -0.75)
 rotation = -0.785398
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_id8of")
 
 [node name="Timer" type="Timer" parent="."]
