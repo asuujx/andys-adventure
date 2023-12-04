@@ -52,7 +52,6 @@ func movement():
 	elif velocity.length() == 0:
 		$AnimatedSprite2D.play("idle")
 	
-	
 	move_and_slide()
 
 func attack():
@@ -61,56 +60,12 @@ func attack():
 		if iceSpearTimer.is_stopped():
 			iceSpearTimer.start()
 
-func _on_hurt_box_hurt(damage, _angle, _knockback):
-	hp -= damage
-	print("HP: ", hp)
-
-
-func _on_ice_spear_timer_timeout():
-	ice_spear_ammo += ice_spear_base_ammo
-	iceSpearAttackTimer.start()
-
-
-func _on_ice_spear_attack_timer_timeout():
-	if ice_spear_ammo > 0:
-		var ice_spear_attack = iceSpear.instantiate()
-		ice_spear_attack.position = position
-		ice_spear_attack.target = get_random_target()
-		ice_spear_level = ice_spear_level
-		add_child(ice_spear_attack)
-		ice_spear_ammo -= 1
-		if ice_spear_ammo > 0:
-			iceSpearAttackTimer.start()
-		else:
-			iceSpearAttackTimer.stop()
-		
 func get_random_target():
 	if enemy_close.size() > 0:
 		return enemy_close.pick_random().global_position
 	else:
 		return Vector2.UP
 
-
-func _on_enemy_detection_area_body_entered(body):
-	if not enemy_close.has(body):
-		enemy_close.append(body)
-
-
-func _on_enemy_detection_area_body_exited(body):
-	if enemy_close.has(body):
-		enemy_close.erase(body)
-
-
-func _on_grab_area_area_entered(area):
-	if area.is_in_group("loot"):
-		area.target = self
-
-
-func _on_collect_area_area_entered(area):
-	if area.is_in_group("loot"):
-		var gem_exp = area.collect()
-		calculate_experience(gem_exp)
-		
 func calculate_experience(gem_exp):
 	var exp_required = calculate_experience_cap()
 	collected_experience += gem_exp
@@ -143,3 +98,42 @@ func calculate_experience_cap():
 func set_exp_bar(set_value = 1, set_max_value = 100):
 	expBar.value = set_value
 	expBar.max_value = set_max_value
+
+func _on_hurt_box_hurt(damage, _angle, _knockback):
+	hp -= damage
+	print("HP: ", hp)
+
+func _on_ice_spear_timer_timeout():
+	ice_spear_ammo += ice_spear_base_ammo
+	iceSpearAttackTimer.start()
+
+func _on_ice_spear_attack_timer_timeout():
+	if ice_spear_ammo > 0:
+		var ice_spear_attack = iceSpear.instantiate()
+		ice_spear_attack.position = position
+		ice_spear_attack.target = get_random_target()
+		ice_spear_level = ice_spear_level
+		add_child(ice_spear_attack)
+		ice_spear_ammo -= 1
+		if ice_spear_ammo > 0:
+			iceSpearAttackTimer.start()
+		else:
+			iceSpearAttackTimer.stop()
+		
+
+func _on_enemy_detection_area_body_entered(body):
+	if not enemy_close.has(body):
+		enemy_close.append(body)
+
+func _on_enemy_detection_area_body_exited(body):
+	if enemy_close.has(body):
+		enemy_close.erase(body)
+
+func _on_grab_area_area_entered(area):
+	if area.is_in_group("loot"):
+		area.target = self
+
+func _on_collect_area_area_entered(area):
+	if area.is_in_group("loot"):
+		var gem_exp = area.collect()
+		calculate_experience(gem_exp)
