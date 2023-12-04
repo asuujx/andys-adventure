@@ -394,3 +394,5 @@ layer_1/tile_data = PackedInt32Array()
 [node name="Player" parent="." instance=ExtResource("4_sio26")]
 
 [node name="EnemySpawner" parent="." instance=ExtResource("5_ve58g")]
+
+[node name="Loot" type="Node2D" parent="." groups=["loot"]]

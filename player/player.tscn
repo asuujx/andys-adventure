@@ -1,9 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://dv3mxxu3mjn6c"]
+[gd_scene load_steps=23 format=3 uid="uid://dv3mxxu3mjn6c"]
 
 [ext_resource type="Texture2D" uid="uid://bg3regl3jdvx3" path="res://assets/textures/player/Dude_Monster_Idle_4.png" id="1_eqjur"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_imn30"]
 [ext_resource type="Texture2D" uid="uid://bs6hhcaepecwm" path="res://assets/textures/player/Dude_Monster_Walk_6.png" id="2_gf2se"]
 [ext_resource type="PackedScene" uid="uid://b85juq3tpxqxc" path="res://utility/hurt_box.tscn" id="4_0wd1y"]
+[ext_resource type="Texture2D" uid="uid://cwh4e54a5oxf0" path="res://assets/textures/gui/BarV9_Bar.png" id="5_0tng3"]
+[ext_resource type="Texture2D" uid="uid://ieuavo0pvx7u" path="res://assets/textures/gui/BarV9_ProgressBar.png" id="6_vbgqy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhoqn"]
 atlas = ExtResource("1_eqjur")
@@ -98,6 +100,11 @@ size = Vector2(16, 22)
 [sub_resource type="CircleShape2D" id="CircleShape2D_y2i4o"]
 radius = 368.136
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_iaa86"]
+radius = 50.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_de45n"]
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_imn30")
@@ -130,6 +137,7 @@ wait_time = 1.5
 wait_time = 0.075
 
 [node name="EnemyDetectionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 4
 monitorable = false
@@ -137,10 +145,51 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea"]
 shape = SubResource("CircleShape2D_y2i4o")
 
+[node name="GrabArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+shape = SubResource("CircleShape2D_iaa86")
+
+[node name="CollectArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
+shape = SubResource("CircleShape2D_de45n")
+
+[node name="GUILayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="GUILayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 20.0
+nine_patch_stretch = true
+texture_under = ExtResource("5_0tng3")
+texture_progress = ExtResource("6_vbgqy")
+
+[node name="lbl_level" type="Label" parent="GUILayer/GUI/ExperienceBar"]
+layout_mode = 0
+offset_top = -4.0
+offset_right = 100.0
+offset_bottom = 22.0
+text = "Level: 1"
+horizontal_alignment = 1
+vertical_alignment = 2
+
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/IceSpearTimer" to="." method="_on_ice_spear_timer_timeout"]
 [connection signal="timeout" from="Attack/IceSpearTimer/IceSpearAttackTimer" to="." method="_on_ice_spear_attack_timer_timeout"]
 [connection signal="body_entered" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_entered"]
 [connection signal="body_exited" from="EnemyDetectionArea" to="." method="_on_enemy_detection_area_body_exited"]
+[connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
+[connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 
 [editable path="HurtBox"]
