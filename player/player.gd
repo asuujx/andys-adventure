@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var movement_speed = 50.0
 var hp = 80
+var last_movement = Vector2.UP
 
 # Experience
 var experience = 0
@@ -14,16 +15,25 @@ var collected_experience = 0
 
 # Attacks
 var iceSpear = preload("res://player/attack/ice_spear.tscn")
+var tornado = preload("res://player/attack/tornado.tscn")
 
 # Attack Nodes
 @onready var iceSpearTimer = get_node("Attack/IceSpearTimer")
 @onready var iceSpearAttackTimer = get_node("Attack/IceSpearTimer/IceSpearAttackTimer")
+@onready var tornadoTimer = get_node("Attack/TornadoTimer")
+@onready var tornadoAttackTimer = get_node("Attack/TornadoTimer/TornadoAttackTimer")
 
 # Ice Spear
 var ice_spear_ammo = 0
 var ice_spear_base_ammo = 1
 var ice_spear_attack_speed = 1.5
-var ice_spear_level = 1
+var ice_spear_level = 0
+
+# Tornado
+var tornado_ammo = 0
+var tornado_base_ammo = 5
+var tornado_attack_speed = 3
+var tornado_level = 1
 
 # Enemy Related
 var enemy_close = []
@@ -44,6 +54,7 @@ func movement():
 	
 	if velocity.length() > 0:
 		$AnimatedSprite2D.play("walk")
+		last_movement = mov
 		
 		if Input.is_action_pressed("left"):
 			$AnimatedSprite2D.flip_h = true
@@ -59,6 +70,10 @@ func attack():
 		iceSpearTimer.wait_time = ice_spear_attack_speed
 		if iceSpearTimer.is_stopped():
 			iceSpearTimer.start()
+	if tornado_level > 0:
+		tornadoTimer.wait_time = tornado_attack_speed
+		if tornadoTimer.is_stopped():
+			tornadoTimer.start()
 
 func get_random_target():
 	if enemy_close.size() > 0:
@@ -119,6 +134,23 @@ func _on_ice_spear_attack_timer_timeout():
 			iceSpearAttackTimer.start()
 		else:
 			iceSpearAttackTimer.stop()
+		
+func _on_tornado_timer_timeout():
+	tornado_ammo += tornado_base_ammo
+	tornadoAttackTimer.start()
+	
+func _on_tornado_attack_timer_timeout():
+	if tornado_ammo > 0:
+		var tornado_attack = tornado.instantiate()
+		tornado_attack.position = position
+		tornado_attack.last_movement = last_movement
+		tornado_level = tornado_level
+		add_child(tornado_attack)
+		tornado_ammo -= 1
+		if tornado_ammo > 0:
+			tornadoAttackTimer.start()
+		else:
+			tornadoAttackTimer.stop()
 		
 
 func _on_enemy_detection_area_body_entered(body):

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cmocf5mgkam6s"]
+
+[ext_resource type="Script" path="res://player/attack/tornado.gd" id="1_7bsmn"]
+[ext_resource type="Texture2D" uid="uid://et4bfvh24ewj" path="res://assets/textures/weapon/tornado.png" id="1_m56uh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_svagu"]
+size = Vector2(18, 27)
+
+[node name="Tornado" type="Area2D" groups=["attack"]]
+top_level = true
+scale = Vector2(0.1, 0.1)
+collision_layer = 5
+collision_mask = 0
+script = ExtResource("1_7bsmn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_m56uh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_svagu")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
