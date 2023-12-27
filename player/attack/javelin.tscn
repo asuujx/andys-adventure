@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcis4v5aky87u"]
+
+[ext_resource type="Script" path="res://player/attack/javelin.gd" id="1_oaqog"]
+[ext_resource type="Texture2D" uid="uid://4kb4insxhkq0" path="res://assets/textures/weapon/javelin_3_new.png" id="1_u85t4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y5jee"]
+size = Vector2(6.36396, 34.6482)
+
+[node name="Javelin" type="Area2D" groups=["attack"]]
+top_level = true
+collision_layer = 5
+collision_mask = 0
+script = ExtResource("1_oaqog")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_u85t4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.38419e-07, 0.5)
+rotation = -0.785398
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_y5jee")
+disabled = true
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="ChangeDirection" type="Timer" parent="."]
+
+[node name="ResetPosTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="ChangeDirection" to="." method="_on_change_direction_timeout"]
+[connection signal="timeout" from="ResetPosTimer" to="." method="_on_reset_pos_timer_timeout"]
