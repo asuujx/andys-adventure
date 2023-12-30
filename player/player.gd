@@ -12,6 +12,9 @@ var collected_experience = 0
 # GUI
 @onready var expBar = get_node("GUILayer/GUI/ExperienceBar")
 @onready var lblLevel = get_node("GUILayer/GUI/ExperienceBar/lbl_level")
+@onready var levelPanel = get_node("GUILayer/GUI/LevelUp")
+@onready var upgradeOptions = get_node("GUILayer/GUI/LevelUp/UpgradeOptions")
+@onready var itemOptions = preload("res://utility/item_option.tscn")
 
 # Attacks
 var iceSpear = preload("res://player/attack/ice_spear.tscn")
@@ -96,10 +99,9 @@ func calculate_experience(gem_exp):
 	if experience + collected_experience >= exp_required: # level up
 		collected_experience -= exp_required - experience
 		experience_level += 1
-		lblLevel.text = str("Level: ", experience_level)
 		experience = 0
 		exp_required = calculate_experience_cap()
-		calculate_experience(0)
+		level_up()
 	else: 
 		experience += collected_experience
 		collected_experience = 0
@@ -121,6 +123,33 @@ func calculate_experience_cap():
 func set_exp_bar(set_value = 1, set_max_value = 100):
 	expBar.value = set_value
 	expBar.max_value = set_max_value
+	
+func level_up():
+	lblLevel.text = str("Level: ", experience_level)
+	var tween = levelPanel.create_tween()
+	tween.tween_property(levelPanel, "position", Vector2(220, 50), 0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.play()
+	levelPanel.visible = true
+	
+	var options = 0
+	var options_max = 3
+	while options < options_max: 
+		var option_choice = itemOptions.instantiate()
+		upgradeOptions.add_child(option_choice)
+		options += 1
+	
+	get_tree().paused = true
+	
+func upgrade_character(upgrade):
+	var option_children = upgradeOptions.get_children()
+	
+	for i in option_children:
+		i.queue_free()
+		
+	levelPanel.visible = false
+	levelPanel.position = Vector2(800, 50)
+	get_tree().paused = false
+	calculate_experience(0)
 
 func _on_hurt_box_hurt(damage, _angle, _knockback):
 	hp -= damage
