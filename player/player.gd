@@ -28,21 +28,30 @@ var javelin = preload("res://player/attack/javelin.tscn")
 @onready var tornadoAttackTimer = get_node("Attack/TornadoTimer/TornadoAttackTimer")
 @onready var javelinBase = get_node("Attack/JavelinBase")
 
+# Upgrades
+var collected_upgrades = []
+var upgrade_options = []
+var armor = 0
+var speed = 0
+var spell_cooldown = 0
+var spell_size = 0
+var additional_attacks = 0
+
 # Ice Spear
 var ice_spear_ammo = 0
-var ice_spear_base_ammo = 1
+var ice_spear_base_ammo = 0
 var ice_spear_attack_speed = 1.5
 var ice_spear_level = 0
 
 # Tornado
 var tornado_ammo = 0
-var tornado_base_ammo = 1
+var tornado_base_ammo = 0
 var tornado_attack_speed = 3
 var tornado_level = 0
 
 # Javelin
-var javelin_ammo = 1
-var javelin_level = 1
+var javelin_ammo = 0
+var javelin_level = 0
 
 # Enemy Related
 var enemy_close = []
@@ -135,6 +144,7 @@ func level_up():
 	var options_max = 3
 	while options < options_max: 
 		var option_choice = itemOptions.instantiate()
+		option_choice.item = get_random_item()
 		upgradeOptions.add_child(option_choice)
 		options += 1
 	
@@ -146,6 +156,8 @@ func upgrade_character(upgrade):
 	for i in option_children:
 		i.queue_free()
 		
+	upgrade_options.clear()
+	collected_upgrades.append(upgrade)
 	levelPanel.visible = false
 	levelPanel.position = Vector2(800, 50)
 	get_tree().paused = false
@@ -214,3 +226,27 @@ func _on_collect_area_area_entered(area):
 	if area.is_in_group("loot"):
 		var gem_exp = area.collect()
 		calculate_experience(gem_exp)
+
+func get_random_item():
+	var dblist = []
+	for i in UpgradeDb.UPGRADES:
+		if i in collected_upgrades: #Find already collected upgrades
+			pass
+		elif i in upgrade_options: #If the upgrade is already an option
+			pass
+		elif UpgradeDb.UPGRADES[i]["type"] == "item": #Don't pick food 
+			pass
+		elif UpgradeDb.UPGRADES[i]["prerequisite"].size() > 0: #Check for prerequisite
+			for n in UpgradeDb.UPGRADES[i]["prerequisite"]:
+				if not n in collected_upgrades:
+					pass
+				else:
+					dblist.append(i)
+		else:
+			dblist.append(i)
+	if dblist.size() > 0:
+		var random_item = dblist.pick_random()
+		upgrade_options.append(random_item)
+		return random_item
+	else:
+		return null

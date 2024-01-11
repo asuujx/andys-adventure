@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dqmqfaemwbuj"]
+[gd_scene load_steps=11 format=3 uid="uid://dqmqfaemwbuj"]
 
 [ext_resource type="Texture2D" uid="uid://ce1mjmblgln3" path="res://assets/textures/map/Tileset-Terrain2.png" id="1_i813a"]
 [ext_resource type="Texture2D" uid="uid://eueup6v34qof" path="res://assets/textures/map/wall-8 - 2 tiles tall-transparency.png" id="2_l2ma8"]
 [ext_resource type="Texture2D" uid="uid://bo8waic52hi1c" path="res://assets/textures/map/wall-8 - 2 tiles tall.png" id="3_lxs5y"]
 [ext_resource type="PackedScene" uid="uid://dv3mxxu3mjn6c" path="res://player/player.tscn" id="4_sio26"]
 [ext_resource type="PackedScene" uid="uid://ckarjytv0hb4f" path="res://utility/enemy_spawner.tscn" id="5_ve58g"]
+[ext_resource type="PackedScene" uid="uid://dksyoclhfluqy" path="res://objects/experience_flower.tscn" id="6_adlne"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p08lx"]
 texture = ExtResource("1_i813a")
@@ -396,3 +397,7 @@ layer_1/tile_data = PackedInt32Array()
 [node name="EnemySpawner" parent="." instance=ExtResource("5_ve58g")]
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
+
+[node name="ExperienceFlower" parent="Loot" instance=ExtResource("6_adlne")]
+position = Vector2(138, 79)
+experience = 20
