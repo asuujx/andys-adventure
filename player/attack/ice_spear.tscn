@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://mcess32dnr8b"]
 
 [ext_resource type="Script" path="res://player/attack/ice_spear.gd" id="1_0juvb"]
-[ext_resource type="Texture2D" uid="uid://bqfw6ylt2j380" path="res://player/attack/ice_spear.png" id="1_vvtvu"]
+[ext_resource type="Texture2D" uid="uid://cvfpbsqbfleer" path="res://assets/textures/weapon/ice_spear.png" id="2_n3fni"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_id8of"]
 size = Vector2(6.36396, 33.9411)
@@ -14,7 +14,7 @@ collision_mask = 4
 script = ExtResource("1_0juvb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_vvtvu")
+texture = ExtResource("2_n3fni")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.75, -0.75)

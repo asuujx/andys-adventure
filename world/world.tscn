@@ -400,4 +400,4 @@ layer_1/tile_data = PackedInt32Array()
 
 [node name="ExperienceFlower" parent="Loot" instance=ExtResource("6_adlne")]
 position = Vector2(138, 79)
-experience = 20
+experience = 5000
