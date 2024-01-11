@@ -1,11 +1,13 @@
-[gd_scene load_steps=23 format=3 uid="uid://dv3mxxu3mjn6c"]
+[gd_scene load_steps=25 format=3 uid="uid://dv3mxxu3mjn6c"]
 
 [ext_resource type="Texture2D" uid="uid://bg3regl3jdvx3" path="res://assets/textures/player/Dude_Monster_Idle_4.png" id="1_eqjur"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_imn30"]
 [ext_resource type="Texture2D" uid="uid://bs6hhcaepecwm" path="res://assets/textures/player/Dude_Monster_Walk_6.png" id="2_gf2se"]
 [ext_resource type="PackedScene" uid="uid://b85juq3tpxqxc" path="res://utility/hurt_box.tscn" id="4_0wd1y"]
-[ext_resource type="Texture2D" uid="uid://cwh4e54a5oxf0" path="res://assets/textures/gui/BarV9_Bar.png" id="5_0tng3"]
-[ext_resource type="Texture2D" uid="uid://ieuavo0pvx7u" path="res://assets/textures/gui/BarV9_ProgressBar.png" id="6_vbgqy"]
+[ext_resource type="Texture2D" uid="uid://cwh4e54a5oxf0" path="res://assets/textures/gui/levelbar.png" id="5_x0ui4"]
+[ext_resource type="Texture2D" uid="uid://ieuavo0pvx7u" path="res://assets/textures/gui/level.png" id="6_t4tdm"]
+[ext_resource type="Texture2D" uid="uid://ceg5wx1tjsr3f" path="res://assets/textures/gui/healthbar.png" id="7_47dxv"]
+[ext_resource type="Texture2D" uid="uid://bq8n6eyeo3175" path="res://assets/textures/gui/health.png" id="8_rfiai"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhoqn"]
 atlas = ExtResource("1_eqjur")
@@ -180,8 +182,8 @@ layout_mode = 0
 offset_right = 640.0
 offset_bottom = 20.0
 nine_patch_stretch = true
-texture_under = ExtResource("5_0tng3")
-texture_progress = ExtResource("6_vbgqy")
+texture_under = ExtResource("5_x0ui4")
+texture_progress = ExtResource("6_t4tdm")
 
 [node name="lbl_level" type="Label" parent="GUILayer/GUI/ExperienceBar"]
 layout_mode = 0
@@ -191,6 +193,17 @@ offset_bottom = 22.0
 text = "Level: 1"
 horizontal_alignment = 1
 vertical_alignment = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="GUILayer/GUI"]
+self_modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 0
+offset_left = 304.0
+offset_top = 200.0
+offset_right = 336.0
+offset_bottom = 208.0
+value = 30.0
+texture_over = ExtResource("7_47dxv")
+texture_progress = ExtResource("8_rfiai")
 
 [node name="LevelUp" type="Panel" parent="GUILayer/GUI"]
 process_mode = 2
@@ -215,6 +228,32 @@ offset_left = 10.0
 offset_top = 50.0
 offset_right = 190.0
 offset_bottom = 100.0
+
+[node name="lblTimer" type="Label" parent="GUILayer/GUI"]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 20.0
+offset_right = 360.0
+offset_bottom = 46.0
+text = "00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollectedWeapons" type="GridContainer" parent="GUILayer/GUI"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 208.0
+offset_bottom = 40.0
+columns = 10
+
+[node name="CollectedUpgrades" type="GridContainer" parent="GUILayer/GUI"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 40.0
+offset_right = 208.0
+offset_bottom = 56.0
+columns = 10
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/IceSpearTimer" to="." method="_on_ice_spear_timer_timeout"]
