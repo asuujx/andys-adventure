@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dv3mxxu3mjn6c"]
+[gd_scene load_steps=26 format=3 uid="uid://dv3mxxu3mjn6c"]
 
 [ext_resource type="Texture2D" uid="uid://bg3regl3jdvx3" path="res://assets/textures/player/Dude_Monster_Idle_4.png" id="1_eqjur"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_imn30"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ieuavo0pvx7u" path="res://assets/textures/gui/level.png" id="6_t4tdm"]
 [ext_resource type="Texture2D" uid="uid://ceg5wx1tjsr3f" path="res://assets/textures/gui/healthbar.png" id="7_47dxv"]
 [ext_resource type="Texture2D" uid="uid://bq8n6eyeo3175" path="res://assets/textures/gui/health.png" id="8_rfiai"]
+[ext_resource type="PackedScene" uid="uid://cydsax1whviye" path="res://utility/basic_button.tscn" id="9_uaxxr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qhoqn"]
 atlas = ExtResource("1_eqjur")
@@ -228,6 +229,31 @@ offset_left = 10.0
 offset_top = 50.0
 offset_right = 190.0
 offset_bottom = 100.0
+
+[node name="DeathPanel" type="Panel" parent="GUILayer/GUI"]
+process_mode = 2
+visible = false
+layout_mode = 0
+offset_left = 221.0
+offset_top = -274.0
+offset_right = 421.0
+offset_bottom = -24.0
+
+[node name="lbl_Result" type="Label" parent="GUILayer/GUI/DeathPanel"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 50.0
+text = "Result"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btn_menu" parent="GUILayer/GUI/DeathPanel" instance=ExtResource("9_uaxxr")]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 200.0
+offset_right = 151.0
+offset_bottom = 236.0
+text = "Menu"
 
 [node name="lblTimer" type="Label" parent="GUILayer/GUI"]
 layout_mode = 0

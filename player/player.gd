@@ -22,6 +22,9 @@ var collected_experience = 0
 @onready var collectedWeapons = get_node("GUILayer/GUI/CollectedWeapons")
 @onready var collectedUpgrades = get_node("GUILayer/GUI/CollectedUpgrades")
 @onready var itemContainer = preload("res://player/GUI/item_container.tscn")
+@onready var deathPanel = get_node("GUILayer/GUI/DeathPanel")
+@onready var lblResult = get_node("GUILayer/GUI/DeathPanel/lbl_Result")
+
 
 # Attacks
 var iceSpear = preload("res://player/attack/ice_spear.tscn")
@@ -276,7 +279,20 @@ func _on_hurt_box_hurt(damage, _angle, _knockback):
 	hp -= clamp(damage - armor, 1.0, 999.0)
 	healthBar.max_value = max_hp
 	healthBar.value = hp
-	print("HP: ", hp)
+	# print("HP: ", hp)
+	if hp <= 0:
+		death()
+		
+func death():
+	deathPanel.visible  = true
+	get_tree().paused = true
+	var tween = deathPanel.create_tween()
+	tween.tween_property(deathPanel, "position", Vector2(220, 50), 3.0).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
+	tween.play()
+	if time >= 300:
+		lblResult.text = "You Win"
+	else:
+		lblResult.text = "You Lose"
 
 func adjust_gui_collection(upgrade):
 	var get_upgraded_display_names = UpgradeDb.UPGRADES[upgrade]["displayname"]
