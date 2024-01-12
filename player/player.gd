@@ -360,3 +360,8 @@ func _on_tornado_attack_timer_timeout():
 			tornadoAttackTimer.start()
 		else:
 			tornadoAttackTimer.stop()
+
+
+func _on_btn_menu_click_end():
+	get_tree().paused = false
+	var _level = get_tree().change_scene_to_file("res://title_screen/menu.tscn")
