@@ -220,46 +220,6 @@ func upgrade_character(upgrade):
 	levelPanel.position = Vector2(800, 50)
 	get_tree().paused = false
 	calculate_experience(0)
-
-func _on_hurt_box_hurt(damage, _angle, _knockback):
-	hp -= clamp(damage - armor, 1.0, 999.0)
-	healthBar.max_value = max_hp
-	healthBar.value = hp
-	print("HP: ", hp)
-
-func _on_ice_spear_timer_timeout():
-	ice_spear_ammo += ice_spear_base_ammo + additional_attacks
-	iceSpearAttackTimer.start()
-
-func _on_ice_spear_attack_timer_timeout():
-	if ice_spear_ammo > 0:
-		var ice_spear_attack = iceSpear.instantiate()
-		ice_spear_attack.position = position
-		ice_spear_attack.target = get_random_target()
-		ice_spear_level = ice_spear_level
-		add_child(ice_spear_attack)
-		ice_spear_ammo -= 1
-		if ice_spear_ammo > 0:
-			iceSpearAttackTimer.start()
-		else:
-			iceSpearAttackTimer.stop()
-		
-func _on_tornado_timer_timeout():
-	tornado_ammo += tornado_base_ammo + additional_attacks
-	tornadoAttackTimer.start()
-	
-func _on_tornado_attack_timer_timeout():
-	if tornado_ammo > 0:
-		var tornado_attack = tornado.instantiate()
-		tornado_attack.position = position
-		tornado_attack.last_movement = last_movement
-		tornado_level = tornado_level
-		add_child(tornado_attack)
-		tornado_ammo -= 1
-		if tornado_ammo > 0:
-			tornadoAttackTimer.start()
-		else:
-			tornadoAttackTimer.stop()
 		
 func spawn_javelin():
 	var get_javelin_total = javelinBase.get_child_count()
@@ -275,23 +235,6 @@ func spawn_javelin():
 	for i in get_javelins:
 		if i.has_method("updade_javelin"):
 			i.update_javelin()
-
-func _on_enemy_detection_area_body_entered(body):
-	if not enemy_close.has(body):
-		enemy_close.append(body)
-
-func _on_enemy_detection_area_body_exited(body):
-	if enemy_close.has(body):
-		enemy_close.erase(body)
-
-func _on_grab_area_area_entered(area):
-	if area.is_in_group("loot"):
-		area.target = self
-
-func _on_collect_area_area_entered(area):
-	if area.is_in_group("loot"):
-		var gem_exp = area.collect()
-		calculate_experience(gem_exp)
 
 func get_random_item():
 	var dblist = []
@@ -329,6 +272,12 @@ func change_time(argtime = 0):
 		get_s = str(0, get_s)
 	lblTimer.text = str(get_m, ":", get_s)
 	
+func _on_hurt_box_hurt(damage, _angle, _knockback):
+	hp -= clamp(damage - armor, 1.0, 999.0)
+	healthBar.max_value = max_hp
+	healthBar.value = hp
+	print("HP: ", hp)
+
 func adjust_gui_collection(upgrade):
 	var get_upgraded_display_names = UpgradeDb.UPGRADES[upgrade]["displayname"]
 	var get_type = UpgradeDb.UPGRADES[upgrade]["type"]
@@ -344,3 +293,54 @@ func adjust_gui_collection(upgrade):
 					collectedWeapons.add_child(new_item)
 				"upgrade":
 					collectedUpgrades.add_child(new_item)
+					
+func _on_enemy_detection_area_body_entered(body):
+	if not enemy_close.has(body):
+		enemy_close.append(body)
+
+func _on_enemy_detection_area_body_exited(body):
+	if enemy_close.has(body):
+		enemy_close.erase(body)
+
+func _on_grab_area_area_entered(area):
+	if area.is_in_group("loot"):
+		area.target = self
+
+func _on_collect_area_area_entered(area):
+	if area.is_in_group("loot"):
+		var gem_exp = area.collect()
+		calculate_experience(gem_exp)
+
+func _on_ice_spear_timer_timeout():
+	ice_spear_ammo += ice_spear_base_ammo + additional_attacks
+	iceSpearAttackTimer.start()
+
+func _on_ice_spear_attack_timer_timeout():
+	if ice_spear_ammo > 0:
+		var ice_spear_attack = iceSpear.instantiate()
+		ice_spear_attack.position = position
+		ice_spear_attack.target = get_random_target()
+		ice_spear_level = ice_spear_level
+		add_child(ice_spear_attack)
+		ice_spear_ammo -= 1
+		if ice_spear_ammo > 0:
+			iceSpearAttackTimer.start()
+		else:
+			iceSpearAttackTimer.stop()
+		
+func _on_tornado_timer_timeout():
+	tornado_ammo += tornado_base_ammo + additional_attacks
+	tornadoAttackTimer.start()
+	
+func _on_tornado_attack_timer_timeout():
+	if tornado_ammo > 0:
+		var tornado_attack = tornado.instantiate()
+		tornado_attack.position = position
+		tornado_attack.last_movement = last_movement
+		tornado_level = tornado_level
+		add_child(tornado_attack)
+		tornado_ammo -= 1
+		if tornado_ammo > 0:
+			tornadoAttackTimer.start()
+		else:
+			tornadoAttackTimer.stop()

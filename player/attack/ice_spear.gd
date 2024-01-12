@@ -58,8 +58,6 @@ func enemy_hit(charge = 1):
 		emit_signal("remove_from_array", self)
 		queue_free()
 	
-
-
 func _on_timer_timeout():
 	emit_signal("remove_from_array", self)
 	queue_free()

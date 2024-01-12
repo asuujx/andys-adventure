@@ -113,10 +113,8 @@ func enable_attack(atk = true):
 		collision.call_deferred("set", "disabled", true)
 		sprite.texture = spr_jav_reg
 
-
 func _on_attack_timer_timeout():
 	add_paths()
-
 
 func _on_change_direction_timeout():
 	if target_array.size() > 0:
@@ -131,7 +129,6 @@ func _on_change_direction_timeout():
 		changeDirectionTimer.stop()
 		attackTimer.start()
 		enable_attack(false)
-
 
 func _on_reset_pos_timer_timeout():
 	var choose_direction = randi() % 4

@@ -32,8 +32,6 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func death():
-	# print("dead")
-	
 	# Enemy dies
 	emit_signal("remove_from_array", self)
 	var enemy_death = death_anim.instantiate()
