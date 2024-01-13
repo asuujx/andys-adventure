@@ -1,11 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://dqmqfaemwbuj"]
+[gd_scene load_steps=26 format=3 uid="uid://dqmqfaemwbuj"]
 
 [ext_resource type="Texture2D" uid="uid://ce1mjmblgln3" path="res://assets/textures/map/Tileset-Terrain2.png" id="1_i813a"]
 [ext_resource type="Texture2D" uid="uid://eueup6v34qof" path="res://assets/textures/map/wall-8 - 2 tiles tall-transparency.png" id="2_l2ma8"]
 [ext_resource type="Texture2D" uid="uid://bo8waic52hi1c" path="res://assets/textures/map/wall-8 - 2 tiles tall.png" id="3_lxs5y"]
 [ext_resource type="PackedScene" uid="uid://dv3mxxu3mjn6c" path="res://player/player.tscn" id="4_sio26"]
 [ext_resource type="PackedScene" uid="uid://ckarjytv0hb4f" path="res://utility/enemy_spawner.tscn" id="5_ve58g"]
+[ext_resource type="PackedScene" uid="uid://dai6yg3fgirql" path="res://enemy/enemy_weak.tscn" id="6_0i6cp"]
 [ext_resource type="PackedScene" uid="uid://dksyoclhfluqy" path="res://objects/experience_flower.tscn" id="6_adlne"]
+[ext_resource type="Script" path="res://utility/spawn_info.gd" id="7_dphfc"]
+[ext_resource type="PackedScene" uid="uid://b3eh07ccv4lrs" path="res://enemy/enemy_strong.tscn" id="8_af87b"]
+[ext_resource type="PackedScene" uid="uid://dmo18lj7wnr7s" path="res://enemy/enemy_cyclops.tscn" id="9_rwucy"]
+[ext_resource type="PackedScene" uid="uid://b2ij61krabdcm" path="res://enemy/enemy_boss.tscn" id="10_kw7tu"]
+[ext_resource type="PackedScene" uid="uid://cyyhirr8k0rlc" path="res://enemy/enemy_super_boss.tscn" id="11_e06og"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p08lx"]
 texture = ExtResource("1_i813a")
@@ -376,6 +382,78 @@ sources/0 = SubResource("TileSetAtlasSource_p08lx")
 sources/1 = SubResource("TileSetAtlasSource_wchpy")
 sources/2 = SubResource("TileSetAtlasSource_et6q1")
 
+[sub_resource type="Resource" id="Resource_y1as7"]
+script = ExtResource("7_dphfc")
+time_start = 0
+time_end = 30
+enemy = ExtResource("6_0i6cp")
+enemy_number = 1
+enemy_spawn_delay = 0
+
+[sub_resource type="Resource" id="Resource_i53wa"]
+script = ExtResource("7_dphfc")
+time_start = 30
+time_end = 210
+enemy = ExtResource("8_af87b")
+enemy_number = 2
+enemy_spawn_delay = 0
+
+[sub_resource type="Resource" id="Resource_bjm0g"]
+script = ExtResource("7_dphfc")
+time_start = 60
+time_end = 180
+enemy = ExtResource("8_af87b")
+enemy_number = 1
+enemy_spawn_delay = 1
+
+[sub_resource type="Resource" id="Resource_sq7x5"]
+script = ExtResource("7_dphfc")
+time_start = 180
+time_end = 210
+enemy = ExtResource("9_rwucy")
+enemy_number = 1
+enemy_spawn_delay = 2
+
+[sub_resource type="Resource" id="Resource_5ke1t"]
+script = ExtResource("7_dphfc")
+time_start = 210
+time_end = 240
+enemy = ExtResource("8_af87b")
+enemy_number = 2
+enemy_spawn_delay = 0
+
+[sub_resource type="Resource" id="Resource_oly6o"]
+script = ExtResource("7_dphfc")
+time_start = 240
+time_end = 270
+enemy = ExtResource("9_rwucy")
+enemy_number = 1
+enemy_spawn_delay = 0
+
+[sub_resource type="Resource" id="Resource_3xdkx"]
+script = ExtResource("7_dphfc")
+time_start = 240
+time_end = 240
+enemy = ExtResource("10_kw7tu")
+enemy_number = 1
+enemy_spawn_delay = 0
+
+[sub_resource type="Resource" id="Resource_dfddf"]
+script = ExtResource("7_dphfc")
+time_start = 270
+time_end = 300
+enemy = ExtResource("8_af87b")
+enemy_number = 4
+enemy_spawn_delay = 0
+
+[sub_resource type="Resource" id="Resource_4hlwq"]
+script = ExtResource("7_dphfc")
+time_start = 300
+time_end = 300
+enemy = ExtResource("11_e06og")
+enemy_number = 1
+enemy_spawn_delay = 0
+
 [node name="World" type="Node2D"]
 
 [node name="Background" type="TileMap" parent="."]
@@ -395,6 +473,7 @@ layer_1/tile_data = PackedInt32Array()
 [node name="Player" parent="." instance=ExtResource("4_sio26")]
 
 [node name="EnemySpawner" parent="." instance=ExtResource("5_ve58g")]
+spawns = Array[ExtResource("7_dphfc")]([SubResource("Resource_y1as7"), SubResource("Resource_i53wa"), SubResource("Resource_bjm0g"), SubResource("Resource_sq7x5"), SubResource("Resource_5ke1t"), SubResource("Resource_oly6o"), SubResource("Resource_3xdkx"), SubResource("Resource_dfddf"), SubResource("Resource_4hlwq")])
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 

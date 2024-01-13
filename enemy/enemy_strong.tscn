@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://b3eh07ccv4lrs"]
+
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_j2nl3"]
+[ext_resource type="Texture2D" uid="uid://61cs6uh2owxv" path="res://assets/textures/enemy/kolbold_strong.png" id="2_63yuj"]
+[ext_resource type="PackedScene" uid="uid://b85juq3tpxqxc" path="res://utility/hurt_box.tscn" id="3_rr0hn"]
+[ext_resource type="PackedScene" uid="uid://2mjam4hx604l" path="res://utility/hit_box.tscn" id="4_fmare"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iocg3"]
+atlas = ExtResource("2_63yuj")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q003l"]
+atlas = ExtResource("2_63yuj")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uvohf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iocg3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q003l")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7sidl"]
+radius = 7.0
+height = 22.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_21yu5"]
+size = Vector2(28, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b58yp"]
+size = Vector2(26, 25)
+
+[node name="enemy_strong" type="CharacterBody2D"]
+collision_layer = 5
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_j2nl3")
+movement_speed = 28.0
+hp = 20
+damage = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_uvohf")
+animation = &"run"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_7sidl")
+
+[node name="HurtBox" parent="." instance=ExtResource("3_rr0hn")]
+collision_layer = 4
+collision_mask = 4
+HurtBoxType = 1
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_21yu5")
+
+[node name="HitBox" parent="." instance=ExtResource("4_fmare")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+position = Vector2(0, 1.5)
+shape = SubResource("RectangleShape2D_b58yp")
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]

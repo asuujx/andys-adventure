@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var hp = 10
 @export var knockback_recovery = 3.5
 @export var experience = 1
+@export var damage = 1
 
 var knockback = Vector2.ZERO
 
@@ -14,6 +15,9 @@ var death_anim = preload("res://enemy/enemy_death.tscn")
 var exp_flower = preload("res://objects/experience_flower.tscn")
 
 signal remove_from_array(object)
+
+func _ready():
+	$HitBox.damage = damage
 
 func _physics_process(_delta):
 	knockback = knockback.move_toward(Vector2.ZERO, knockback_recovery)

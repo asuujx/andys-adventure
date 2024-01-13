@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ckarjytv0hb4f"]
 
 [ext_resource type="Script" path="res://utility/enemy_spawner.gd" id="1_lhrmc"]
-[ext_resource type="PackedScene" uid="uid://dai6yg3fgirql" path="res://enemy/enemy.tscn" id="2_vfyjy"]
+[ext_resource type="PackedScene" uid="uid://dai6yg3fgirql" path="res://enemy/enemy_weak.tscn" id="2_vfyjy"]
 [ext_resource type="Script" path="res://utility/spawn_info.gd" id="3_e76e2"]
 
 [sub_resource type="Resource" id="Resource_p1s2e"]

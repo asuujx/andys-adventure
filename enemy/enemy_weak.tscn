@@ -1,32 +1,32 @@
 [gd_scene load_steps=15 format=3 uid="uid://dai6yg3fgirql"]
 
-[ext_resource type="Texture2D" uid="uid://d3jyvcpemymcg" path="res://assets/textures/enemy/Pink_Monster_Run_6.png" id="1_luifr"]
-[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_uef8d"]
-[ext_resource type="PackedScene" uid="uid://b85juq3tpxqxc" path="res://utility/hurt_box.tscn" id="3_j6j3f"]
-[ext_resource type="PackedScene" uid="uid://2mjam4hx604l" path="res://utility/hit_box.tscn" id="4_82q17"]
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_sg2oq"]
+[ext_resource type="Texture2D" uid="uid://d3jyvcpemymcg" path="res://assets/textures/enemy/Pink_Monster_Run_6.png" id="2_f1f8t"]
+[ext_resource type="PackedScene" uid="uid://b85juq3tpxqxc" path="res://utility/hurt_box.tscn" id="3_2dcee"]
+[ext_resource type="PackedScene" uid="uid://2mjam4hx604l" path="res://utility/hit_box.tscn" id="4_eab51"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_082ni"]
-atlas = ExtResource("1_luifr")
+atlas = ExtResource("2_f1f8t")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1an4v"]
-atlas = ExtResource("1_luifr")
+atlas = ExtResource("2_f1f8t")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b7430"]
-atlas = ExtResource("1_luifr")
+atlas = ExtResource("2_f1f8t")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l6sax"]
-atlas = ExtResource("1_luifr")
+atlas = ExtResource("2_f1f8t")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wa1c3"]
-atlas = ExtResource("1_luifr")
+atlas = ExtResource("2_f1f8t")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0tf4h"]
-atlas = ExtResource("1_luifr")
+atlas = ExtResource("2_f1f8t")
 region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uvohf"]
@@ -65,12 +65,11 @@ size = Vector2(21, 27)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b58yp"]
 size = Vector2(12, 20)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="enemy_weak" type="CharacterBody2D"]
 collision_layer = 5
 collision_mask = 5
 motion_mode = 1
-script = ExtResource("1_uef8d")
-movement_speed = 30.0
+script = ExtResource("1_sg2oq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_uvohf")
@@ -81,7 +80,7 @@ visible = false
 position = Vector2(1, 3)
 shape = SubResource("CapsuleShape2D_7sidl")
 
-[node name="HurtBox" parent="." instance=ExtResource("3_j6j3f")]
+[node name="HurtBox" parent="." instance=ExtResource("3_2dcee")]
 collision_layer = 4
 collision_mask = 4
 HurtBoxType = 1
@@ -90,7 +89,7 @@ HurtBoxType = 1
 position = Vector2(0.5, 2.5)
 shape = SubResource("RectangleShape2D_21yu5")
 
-[node name="HitBox" parent="." instance=ExtResource("4_82q17")]
+[node name="HitBox" parent="." instance=ExtResource("4_eab51")]
 collision_layer = 2
 collision_mask = 2
 
