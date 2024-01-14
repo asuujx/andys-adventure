@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dv3mxxu3mjn6c"]
+[gd_scene load_steps=27 format=3 uid="uid://dv3mxxu3mjn6c"]
 
 [ext_resource type="Texture2D" uid="uid://bg3regl3jdvx3" path="res://assets/textures/player/Dude_Monster_Idle_4.png" id="1_eqjur"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_imn30"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cwh4e54a5oxf0" path="res://assets/textures/gui/levelbar.png" id="5_x0ui4"]
 [ext_resource type="Texture2D" uid="uid://ieuavo0pvx7u" path="res://assets/textures/gui/level.png" id="6_t4tdm"]
 [ext_resource type="Texture2D" uid="uid://ceg5wx1tjsr3f" path="res://assets/textures/gui/healthbar.png" id="7_47dxv"]
+[ext_resource type="FontFile" uid="uid://r81hufpejgox" path="res://assets/fonts/monogram.ttf" id="7_x2bni"]
 [ext_resource type="Texture2D" uid="uid://bq8n6eyeo3175" path="res://assets/textures/gui/health.png" id="8_rfiai"]
 [ext_resource type="PackedScene" uid="uid://cydsax1whviye" path="res://utility/basic_button.tscn" id="9_uaxxr"]
 
@@ -189,8 +190,10 @@ texture_progress = ExtResource("6_t4tdm")
 [node name="lbl_level" type="Label" parent="GUILayer/GUI/ExperienceBar"]
 layout_mode = 0
 offset_top = -4.0
-offset_right = 100.0
-offset_bottom = 22.0
+offset_right = 90.0
+offset_bottom = 18.0
+theme_override_fonts/font = ExtResource("7_x2bni")
+theme_override_font_sizes/font_size = 24
 text = "Level: 1"
 horizontal_alignment = 1
 vertical_alignment = 2
@@ -219,7 +222,9 @@ offset_bottom = 300.0
 layout_mode = 0
 offset_right = 200.0
 offset_bottom = 50.0
-text = "Level Up !"
+theme_override_fonts/font = ExtResource("7_x2bni")
+theme_override_font_sizes/font_size = 36
+text = "LEVEL UP!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -243,6 +248,8 @@ offset_bottom = -24.0
 layout_mode = 0
 offset_right = 200.0
 offset_bottom = 50.0
+theme_override_fonts/font = ExtResource("7_x2bni")
+theme_override_font_sizes/font_size = 36
 text = "Result"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -253,7 +260,9 @@ offset_left = 60.0
 offset_top = 200.0
 offset_right = 151.0
 offset_bottom = 236.0
-text = "Menu"
+theme_override_fonts/font = ExtResource("7_x2bni")
+theme_override_font_sizes/font_size = 36
+text = "MENU"
 
 [node name="lblTimer" type="Label" parent="GUILayer/GUI"]
 layout_mode = 0
@@ -261,6 +270,8 @@ offset_left = 280.0
 offset_top = 20.0
 offset_right = 360.0
 offset_bottom = 46.0
+theme_override_fonts/font = ExtResource("7_x2bni")
+theme_override_font_sizes/font_size = 32
 text = "00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
