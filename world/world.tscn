@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dqmqfaemwbuj"]
+[gd_scene load_steps=26 format=3 uid="uid://dqmqfaemwbuj"]
 
 [ext_resource type="Texture2D" uid="uid://ce1mjmblgln3" path="res://assets/textures/map/Tileset-Terrain2.png" id="1_i813a"]
 [ext_resource type="Texture2D" uid="uid://eueup6v34qof" path="res://assets/textures/map/wall-8 - 2 tiles tall-transparency.png" id="2_l2ma8"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dmo18lj7wnr7s" path="res://enemy/enemy_cyclops.tscn" id="9_rwucy"]
 [ext_resource type="PackedScene" uid="uid://b2ij61krabdcm" path="res://enemy/enemy_boss.tscn" id="10_kw7tu"]
 [ext_resource type="PackedScene" uid="uid://cyyhirr8k0rlc" path="res://enemy/enemy_super_boss.tscn" id="11_e06og"]
+[ext_resource type="PackedScene" uid="uid://dksyoclhfluqy" path="res://objects/experience_flower.tscn" id="12_t7ohg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p08lx"]
 texture = ExtResource("1_i813a")
@@ -475,3 +476,7 @@ layer_1/tile_data = PackedInt32Array()
 spawns = Array[ExtResource("7_dphfc")]([SubResource("Resource_y1as7"), SubResource("Resource_i53wa"), SubResource("Resource_bjm0g"), SubResource("Resource_sq7x5"), SubResource("Resource_5ke1t"), SubResource("Resource_oly6o"), SubResource("Resource_3xdkx"), SubResource("Resource_dfddf"), SubResource("Resource_4hlwq")])
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
+
+[node name="ExperienceFlower" parent="Loot" instance=ExtResource("12_t7ohg")]
+position = Vector2(134, 84)
+experience = 10000

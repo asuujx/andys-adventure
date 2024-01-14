@@ -67,7 +67,7 @@ var javelin_level = 0
 var enemy_close = []
 
 func _ready():
-	upgrade_character("icespear1")
+	upgrade_character("tornado1")
 	attack()
 	set_exp_bar(experience, calculate_experience_cap())
 	_on_hurt_box_hurt(0, 0, 0)
@@ -133,7 +133,7 @@ func calculate_experience_cap():
 	var exp_cap = experience_level
 	
 	if experience_level < 20:
-		exp_cap = experience_level * 5
+		exp_cap = experience_level * 3
 	elif experience_level < 40:
 		exp_cap = 95 * (experience_level - 19) * 8
 	else:
