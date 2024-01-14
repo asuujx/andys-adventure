@@ -479,4 +479,4 @@ spawns = Array[ExtResource("7_dphfc")]([SubResource("Resource_y1as7"), SubResour
 
 [node name="ExperienceFlower" parent="Loot" instance=ExtResource("6_adlne")]
 position = Vector2(138, 79)
-experience = 5000
+experience = 100

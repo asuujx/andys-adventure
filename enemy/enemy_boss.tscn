@@ -1,26 +1,40 @@
-[gd_scene load_steps=11 format=3 uid="uid://b2ij61krabdcm"]
+[gd_scene load_steps=13 format=3 uid="uid://b2ij61krabdcm"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_5m5vv"]
-[ext_resource type="Texture2D" uid="uid://clppdn7w77ccm" path="res://assets/textures/enemy/juggernaut.png" id="2_oee84"]
+[ext_resource type="Texture2D" uid="uid://dr75bfs1a26xr" path="res://assets/textures/enemy/boss/FireElemental.png" id="2_y7wi5"]
 [ext_resource type="PackedScene" uid="uid://b85juq3tpxqxc" path="res://utility/hurt_box.tscn" id="3_ullf8"]
 [ext_resource type="PackedScene" uid="uid://2mjam4hx604l" path="res://utility/hit_box.tscn" id="4_fdk3c"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sqh2b"]
-atlas = ExtResource("2_oee84")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybc8y"]
+atlas = ExtResource("2_y7wi5")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b7p2e"]
-atlas = ExtResource("2_oee84")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6gb6"]
+atlas = ExtResource("2_y7wi5")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1der0"]
+atlas = ExtResource("2_y7wi5")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afeuj"]
+atlas = ExtResource("2_y7wi5")
+region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uvohf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sqh2b")
+"texture": SubResource("AtlasTexture_ybc8y")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_b7p2e")
+"texture": SubResource("AtlasTexture_q6gb6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1der0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_afeuj")
 }],
 "loop": true,
 "name": &"run",
@@ -28,14 +42,14 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7sidl"]
-radius = 6.0
-height = 20.0
+radius = 7.0
+height = 26.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_21yu5"]
-size = Vector2(21, 28)
+size = Vector2(20, 28)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b58yp"]
-size = Vector2(18, 24)
+size = Vector2(18, 28)
 
 [node name="enemy_boss" type="CharacterBody2D"]
 collision_layer = 5
@@ -49,11 +63,11 @@ experience = 100
 damage = 8
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.75, 1.75)
 sprite_frames = SubResource("SpriteFrames_uvohf")
 animation = &"run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("CapsuleShape2D_7sidl")
 
 [node name="HurtBox" parent="." instance=ExtResource("3_ullf8")]
@@ -62,7 +76,6 @@ collision_mask = 4
 HurtBoxType = 1
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(0.5, 2)
 shape = SubResource("RectangleShape2D_21yu5")
 
 [node name="HitBox" parent="." instance=ExtResource("4_fdk3c")]
@@ -70,7 +83,6 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
-position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_b58yp")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

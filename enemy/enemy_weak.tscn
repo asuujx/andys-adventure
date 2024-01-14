@@ -1,54 +1,40 @@
-[gd_scene load_steps=15 format=3 uid="uid://dai6yg3fgirql"]
+[gd_scene load_steps=13 format=3 uid="uid://dai6yg3fgirql"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_sg2oq"]
-[ext_resource type="Texture2D" uid="uid://d3jyvcpemymcg" path="res://assets/textures/enemy/Pink_Monster_Run_6.png" id="2_f1f8t"]
+[ext_resource type="Texture2D" uid="uid://p2ywniwm3jhj" path="res://assets/textures/enemy/weak/GrizzledTreant.png" id="2_8yj40"]
 [ext_resource type="PackedScene" uid="uid://b85juq3tpxqxc" path="res://utility/hurt_box.tscn" id="3_2dcee"]
 [ext_resource type="PackedScene" uid="uid://2mjam4hx604l" path="res://utility/hit_box.tscn" id="4_eab51"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_082ni"]
-atlas = ExtResource("2_f1f8t")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_byuv6"]
+atlas = ExtResource("2_8yj40")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1an4v"]
-atlas = ExtResource("2_f1f8t")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbweh"]
+atlas = ExtResource("2_8yj40")
+region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b7430"]
-atlas = ExtResource("2_f1f8t")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_m01am"]
+atlas = ExtResource("2_8yj40")
+region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_l6sax"]
-atlas = ExtResource("2_f1f8t")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wa1c3"]
-atlas = ExtResource("2_f1f8t")
-region = Rect2(128, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0tf4h"]
-atlas = ExtResource("2_f1f8t")
-region = Rect2(160, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_nx0og"]
+atlas = ExtResource("2_8yj40")
+region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uvohf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_082ni")
+"texture": SubResource("AtlasTexture_byuv6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1an4v")
+"texture": SubResource("AtlasTexture_hbweh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_b7430")
+"texture": SubResource("AtlasTexture_m01am")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_l6sax")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wa1c3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0tf4h")
+"texture": SubResource("AtlasTexture_nx0og")
 }],
 "loop": true,
 "name": &"run",
@@ -57,13 +43,13 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7sidl"]
 radius = 6.0
-height = 20.0
+height = 24.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_21yu5"]
-size = Vector2(21, 27)
+size = Vector2(15, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b58yp"]
-size = Vector2(12, 20)
+size = Vector2(16, 24)
 
 [node name="enemy_weak" type="CharacterBody2D"]
 collision_layer = 5
@@ -72,12 +58,12 @@ motion_mode = 1
 script = ExtResource("1_sg2oq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_uvohf")
 animation = &"run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(1, 3)
 shape = SubResource("CapsuleShape2D_7sidl")
 
 [node name="HurtBox" parent="." instance=ExtResource("3_2dcee")]
@@ -86,7 +72,6 @@ collision_mask = 4
 HurtBoxType = 1
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(0.5, 2.5)
 shape = SubResource("RectangleShape2D_21yu5")
 
 [node name="HitBox" parent="." instance=ExtResource("4_eab51")]
@@ -94,7 +79,6 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
-position = Vector2(1, 3)
 shape = SubResource("RectangleShape2D_b58yp")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

@@ -1,26 +1,40 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3eh07ccv4lrs"]
+[gd_scene load_steps=13 format=3 uid="uid://b3eh07ccv4lrs"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_j2nl3"]
-[ext_resource type="Texture2D" uid="uid://61cs6uh2owxv" path="res://assets/textures/enemy/kolbold_strong.png" id="2_63yuj"]
+[ext_resource type="Texture2D" uid="uid://bppeii1i4p7i0" path="res://assets/textures/enemy/strong/CorruptedTreant.png" id="2_7fext"]
 [ext_resource type="PackedScene" uid="uid://b85juq3tpxqxc" path="res://utility/hurt_box.tscn" id="3_rr0hn"]
 [ext_resource type="PackedScene" uid="uid://2mjam4hx604l" path="res://utility/hit_box.tscn" id="4_fmare"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iocg3"]
-atlas = ExtResource("2_63yuj")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5cej"]
+atlas = ExtResource("2_7fext")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_q003l"]
-atlas = ExtResource("2_63yuj")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdlsg"]
+atlas = ExtResource("2_7fext")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mrkh"]
+atlas = ExtResource("2_7fext")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_54cfn"]
+atlas = ExtResource("2_7fext")
+region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uvohf"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_iocg3")
+"texture": SubResource("AtlasTexture_y5cej")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_q003l")
+"texture": SubResource("AtlasTexture_kdlsg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mrkh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_54cfn")
 }],
 "loop": true,
 "name": &"run",
@@ -29,13 +43,13 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7sidl"]
 radius = 7.0
-height = 22.0
+height = 26.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_21yu5"]
-size = Vector2(28, 25)
+size = Vector2(24, 25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b58yp"]
-size = Vector2(26, 25)
+size = Vector2(24, 25)
 
 [node name="enemy_strong" type="CharacterBody2D"]
 collision_layer = 5
@@ -47,6 +61,7 @@ hp = 20
 damage = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.75, 1.75)
 sprite_frames = SubResource("SpriteFrames_uvohf")
 animation = &"run"
 
