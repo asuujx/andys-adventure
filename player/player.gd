@@ -67,7 +67,7 @@ var javelin_level = 0
 var enemy_close = []
 
 func _ready():
-	upgrade_character("tornado1")
+	upgrade_character("javelin1")
 	attack()
 	set_exp_bar(experience, calculate_experience_cap())
 	_on_hurt_box_hurt(0, 0, 0)
