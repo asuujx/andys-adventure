@@ -46,7 +46,7 @@ offset_top = 27.0
 offset_right = 166.0
 offset_bottom = 48.0
 theme_override_fonts/font = ExtResource("3_q3jxh")
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 10
 text = "Description of item"
 autowrap_mode = 3
 
