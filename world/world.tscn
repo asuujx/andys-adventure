@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dqmqfaemwbuj"]
+[gd_scene load_steps=28 format=3 uid="uid://dqmqfaemwbuj"]
 
 [ext_resource type="Texture2D" uid="uid://ce1mjmblgln3" path="res://assets/textures/map/Tileset-Terrain2.png" id="1_i813a"]
 [ext_resource type="Texture2D" uid="uid://eueup6v34qof" path="res://assets/textures/map/wall-8 - 2 tiles tall-transparency.png" id="2_l2ma8"]
@@ -454,6 +454,12 @@ enemy = ExtResource("11_e06og")
 enemy_number = 1
 enemy_spawn_delay = 0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0n5v1"]
+size = Vector2(6432, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mgqkl"]
+size = Vector2(50, 6432)
+
 [node name="World" type="Node2D"]
 
 [node name="Background" type="TileMap" parent="."]
@@ -480,3 +486,23 @@ spawns = Array[ExtResource("7_dphfc")]([SubResource("Resource_y1as7"), SubResour
 [node name="ExperienceFlower" parent="Loot" instance=ExtResource("12_t7ohg")]
 position = Vector2(134, 84)
 experience = 10000
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(16, -3225)
+shape = SubResource("RectangleShape2D_0n5v1")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(16, 3257)
+shape = SubResource("RectangleShape2D_0n5v1")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-3225, 16)
+shape = SubResource("RectangleShape2D_mgqkl")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(3257, 16)
+shape = SubResource("RectangleShape2D_mgqkl")
