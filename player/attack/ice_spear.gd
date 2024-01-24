@@ -48,8 +48,10 @@ func _ready():
 	tween.tween_property(self, "scale", Vector2(1, 1) * attack_size, 1).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 	tween.play()
 
+
 func _physics_process(delta):
 	position += angle * speed * delta
+
 
 func enemy_hit(charge = 1):
 	hp -= charge
@@ -57,7 +59,8 @@ func enemy_hit(charge = 1):
 	if hp <= 0:
 		emit_signal("remove_from_array", self)
 		queue_free()
-	
+
+
 func _on_timer_timeout():
 	emit_signal("remove_from_array", self)
 	queue_free()

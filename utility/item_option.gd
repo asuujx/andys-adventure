@@ -21,7 +21,8 @@ func _ready():
 	lblDescription.text = UpgradeDb.UPGRADES[item]["details"]
 	lblLevel.text = UpgradeDb.UPGRADES[item]["level"]
 	itemIcon.texture = load(UpgradeDb.UPGRADES[item]["icon"])
-	
+
+
 func _input(event):
 	if event.is_action("click"):
 		if mouse_over:

@@ -45,9 +45,11 @@ func _on_area_entered(area):
 			if area.has_method("enemy_hit"):
 				area.enemy_hit(1)
 
+
 func remove_from_list(object):
 	if hit_once_array.has(object):
 		hit_once_array.erase(object)
+
 
 func _on_disable_timer_timeout():
 	collision.call_deferred("set", "disabled", false)

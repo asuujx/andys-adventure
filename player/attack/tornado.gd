@@ -87,9 +87,11 @@ func _ready():
 		tween.tween_property(self, "angle", angle_less, 2)
 		tween.tween_property(self, "angle", angle_more, 2)
 	tween.play()
+	
 
 func _physics_process(delta):
 	position += angle * speed * delta
+
 
 func _on_timer_timeout():
 	emit_signal("remove_from_array", self)

@@ -10,6 +10,7 @@ signal change_time(time)
 func _ready():
 	connect("change_time", Callable(player, "change_time"))
 
+
 func _on_timer_timeout():
 	time += 1
 	
@@ -32,6 +33,7 @@ func _on_timer_timeout():
 					counter += 1
 					
 	emit_signal("change_time", time)
+
 
 func get_random_position():
 	var vpr = get_viewport_rect().size * randf_range(1.1, 1.4)
